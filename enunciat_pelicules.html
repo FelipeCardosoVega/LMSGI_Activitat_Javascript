@@ -75,12 +75,12 @@
     /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
 
     var divContainer = document.getElementById("film-container");
-    //FUNCIONAAA!!!!
-    films.forEach(function (film) {
-      crearTargeta(film);
-      mostrarTargeta(film);
-      console.log(film);
-    });
+    for (let i = 0; i<films.length;i++){
+      console.log(films[i]);
+      crearTargeta(films[i]);
+      //mostrarTargeta(films[i]);
+    }
+    
 
     function crearTargeta(film) {
       const card = document.createElement("div");
@@ -99,16 +99,15 @@
 
       card.appendChild(info);
       divContainer.appendChild(card);
-      //return card;
     }
 
     function msotrarTargeta(film) {
-      var container = document.getElementById("film-container");
-      container.innerHTML = "";
-      films.forEach(function (film) {
-        container.appendChild(crearTargeta(film));
-      });
+      
+      divContainer.innerHTML = "";
 
+      for (let i = 0; i<films.length;i++){
+        divContainer.appendChild(crearTargeta(films[i]));
+      }
     }
 
 
