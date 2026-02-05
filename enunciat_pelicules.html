@@ -74,7 +74,7 @@
   <script>
     /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
 
-
+    var divContainer = document.getElementById("film-container");
     //FUNCIONAAA!!!!
     films.forEach(function (film) {
       crearTargeta(film);
@@ -87,7 +87,7 @@
       card.className = "card";
 
       const info = document.createElement("div");
-      card.className = "targeta";
+      info.className = "targeta";
       info.innerHTML = `
   <div class="targeta-titol"><h2>${film.name}</h2></div>
   <div class="targeta-info"><p><b>Year: </b> ${film.year}</p></div>
@@ -98,7 +98,8 @@
 `;
 
       card.appendChild(info);
-      return card;
+      divContainer.appendChild(card);
+      //return card;
     }
 
     function msotrarTargeta(film) {
