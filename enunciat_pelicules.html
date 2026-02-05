@@ -66,21 +66,35 @@
   <div class="cerca">
     <h1 style="text-align:center; padding: 20px 0;">Col·leció de pel·lícules</h1>
     <input type="text" id="cerca" name="Cerca" title="Terme de cerca" required><br>
-    <button type="button" onclick="funcio()">Cerca</button>
+    <button type="button" onclick="cercar()">Cerca</button>
   </div>
   <div class="container" id="film-container">
   </div>
 
   <script>
     /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
-
-    var divContainer = document.getElementById("film-container");
+    const cercador = document.getElementById("cerca");
+    const divContainer = document.getElementById("film-container");
+    
+    
     for (let i = 0; i<films.length;i++){
       console.log(films[i]);
       crearTargeta(films[i]);
       //mostrarTargeta(films[i]);
     }
+    cercador.onkeyup = cercar;
+      
     
+    function cercar () {
+      //divContainer.innerHTML = "";
+      for (let i = 0; i<films.length;i++){
+        if (cercador.value.toLowerCase().includes(films[i].name.toLowerCase())){
+          crearTargeta(films[i]);
+        }
+      }
+      
+      
+    }
 
     function crearTargeta(film) {
       const card = document.createElement("div");
