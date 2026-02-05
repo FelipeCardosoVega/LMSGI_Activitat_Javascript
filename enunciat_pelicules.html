@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pelis</title>
+  <script src="./infopelis.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .cerca {
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .targeta {
+      padding: 15px;
+    }
+
+    .targeta-titol {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .targeta-info {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cerca">
+    <h1 style="text-align:center; padding: 20px 0;">Col·leció de pel·lícules</h1>
+    <input type="text" id="cerca" name="Cerca" title="Terme de cerca" required><br>
+    <button type="button" onclick="funcio()">Cerca</button>
+  </div>
+  <div class="container" id="film-container">
+  </div>
+
+  <script>
+    /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
+
+
+    //FUNCIONAAA!!!!
+    films.forEach(function (film) {
+      crearTargeta(film);
+      mostrarTargeta(film);
+      console.log(film);
+    });
+
+    function crearTargeta(film) {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const info = document.createElement("div");
+      card.className = "targeta";
+      info.innerHTML = `
+  <div class="targeta-titol"><h2>${film.name}</h2></div>
+  <div class="targeta-info"><p><b>Year: </b> ${film.year}</p></div>
+  <div class="targeta-info"><p><b>Style: </b> ${film.style}</p></div>
+  <div class="targeta-info"><p><b>Director: </b> ${film.director}</p></div>
+  <div class="targeta-info"><p><b>Actors: </b> ${film.actors.join(", ")}</p></div>
+  <div class="targeta-info"><p><b>Oscars: </b> ${film.oscars}</p></div>
+`;
+
+      card.appendChild(info);
+      return card;
+    }
+
+    function msotrarTargeta(film) {
+      var container = document.getElementById("film-container");
+      container.innerHTML = "";
+      films.forEach(function (film) {
+        container.appendChild(crearTargeta(film));
+      });
+
+    }
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+
+  </script>
+
+</body>
+
+</html>
