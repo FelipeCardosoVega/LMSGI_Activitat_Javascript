@@ -66,7 +66,7 @@
   <div class="cerca">
     <h1 style="text-align:center; padding: 20px 0;">Col·leció de pel·lícules</h1>
     <input type="text" id="cerca" name="Cerca" title="Terme de cerca" required><br>
-    <button type="button" onclick="cercar()">Cerca</button>
+    <button type="button" onclick="filtrar()">Cerca</button>
   </div>
   <div class="container" id="film-container">
   </div>
@@ -75,26 +75,54 @@
     /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
     const cercador = document.getElementById("cerca");
     const divContainer = document.getElementById("film-container");
-    
-    
-    for (let i = 0; i<films.length;i++){
-      console.log(films[i]);
-      crearTargeta(films[i]);
-      //mostrarTargeta(films[i]);
-    }
-    cercador.onkeyup = cercar;
-      
-    
-    function cercar () {
-      //divContainer.innerHTML = "";
-      for (let i = 0; i<films.length;i++){
-        if (cercador.value.toLowerCase().includes(films[i].name.toLowerCase())){
-          crearTargeta(films[i]);
+    cercador.onkeyup = filtrar();
+    function filtrar(){
+      divContainer.innerHTML = "";
+      if (cercador.value == ""){
+        console.log("Filtrado vacio");
+        for (let i = 0; i<films.length;i++){
+        crearTargeta(films[i]);
+        } 
+      }else {
+        console.log("Filtrado no vacio");
+        for (let i = 0; i<films.length;i++){
+          if (films[i].name.toLowerCase().includes(cercador.value.toLowerCase())){
+            crearTargeta(films[i]);
+          }
+        }
+        for (let i = 0; i<films.length;i++){
+          if (films[i].year.toString().includes(cercador.value)){
+            crearTargeta(films[i]);
+          }
+        }
+        for (let i = 0; i<films.length;i++){
+          if (films[i].style.toLowerCase().includes(cercador.value.toLowerCase())){
+            crearTargeta(films[i]);
+          }
+        }
+        for (let i = 0; i<films.length;i++){
+          if (films[i].director.toLowerCase().includes(cercador.value.toLowerCase())){
+            crearTargeta(films[i]);
+          }
+        }
+        for (let i = 0; i<films.length;i++){
+          if (films[i].actors.join(" ").toLowerCase().includes(cercador.value.toLowerCase())){
+            crearTargeta(films[i]);
+          }
+        }
+        for (let i = 0; i<films.length;i++){
+          if (films[i].oscars.toString().includes(cercador.value)){
+            crearTargeta(films[i]);
+          }
         }
       }
-      
-      
+
     }
+    for (let i = 0; i<films.length;i++){
+      crearTargeta(films[i]);
+    }
+      
+    
 
     function crearTargeta(film) {
       const card = document.createElement("div");
@@ -114,22 +142,6 @@
       card.appendChild(info);
       divContainer.appendChild(card);
     }
-
-    function msotrarTargeta(film) {
-      
-      divContainer.innerHTML = "";
-
-      for (let i = 0; i<films.length;i++){
-        divContainer.appendChild(crearTargeta(films[i]));
-      }
-    }
-
-
-
-
-
-
-
     ///////////////////////////////////////////////////////////////////////////
 
   </script>
