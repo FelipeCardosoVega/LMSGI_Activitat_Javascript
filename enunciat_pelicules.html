@@ -1,136 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pelis</title>
+    <script src="./infopelis.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pelis</title>
-  <script src="./infopelis.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
+      .cerca {
+        background-color: #f1f1f1;
+        padding: 20px;
+      }
 
-    .cerca {
-      background-color: #f1f1f1;
-      padding: 20px;
-    }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
+      .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
 
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
+      .card:hover {
+        transform: scale(1.02);
+      }
 
-    .card:hover {
-      transform: scale(1.02);
-    }
+      .card img {
+        width: 100%;
+        height: auto;
+      }
 
-    .card img {
-      width: 100%;
-      height: auto;
-    }
+      .targeta {
+        padding: 15px;
+      }
 
-    .targeta {
-      padding: 15px;
-    }
+      .targeta-titol {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
 
-    .targeta-titol {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+      .targeta-info {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
 
-    .targeta-info {
-      font-size: 14px;
-      color: #333;
-      margin-bottom: 5px;
-    }
-  </style>
-</head>
+  <body>
+    <div class="cerca">
+      <h1 style="text-align: center; padding: 20px 0">
+        Col·leció de pel·lícules
+      </h1>
+      <input
+        type="text"
+        id="cerca"
+        name="Cerca"
+        title="Terme de cerca"
+        required
+      /><br />
+      <button type="button" onclick="filtrar()">Cerca</button>
+    </div>
+    <div class="container" id="film-container"></div>
 
-<body>
-
-  <div class="cerca">
-    <h1 style="text-align:center; padding: 20px 0;">Col·leció de pel·lícules</h1>
-    <input type="text" id="cerca" name="Cerca" title="Terme de cerca" required><br>
-    <button type="button" onclick="filtrar()">Cerca</button>
-  </div>
-  <div class="container" id="film-container">
-  </div>
-
-  <script>
-    /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
-    const cercador = document.getElementById("cerca");
-    const divContainer = document.getElementById("film-container");
-    cercador.onkeyup = filtrar();
-    function filtrar(){
-      divContainer.innerHTML = "";
-      if (cercador.value == ""){
-        console.log("Filtrado vacio");
-        for (let i = 0; i<films.length;i++){
-        crearTargeta(films[i]);
-        } 
-      }else {
-        console.log("Filtrado no vacio");
-        for (let i = 0; i<films.length;i++){
-          if (films[i].name.toLowerCase().includes(cercador.value.toLowerCase())){
+    <script>
+      /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
+      const cercador = document.getElementById("cerca");
+      const divContainer = document.getElementById("film-container");
+      cercador.onkeyup = filtrar();
+      function filtrar() {
+        divContainer.innerHTML = "";
+        if (cercador.value == "") {
+          console.log("Filtrado vacio");
+          for (let i = 0; i < films.length; i++) {
             crearTargeta(films[i]);
           }
-        }
-        for (let i = 0; i<films.length;i++){
-          if (films[i].year.toString().includes(cercador.value)){
-            crearTargeta(films[i]);
+        } else {
+          console.log("Filtrado no vacio");
+          for (let i = 0; i < films.length; i++) {
+            if (
+              films[i].name.toLowerCase().includes(cercador.value.toLowerCase())
+            ) {
+              crearTargeta(films[i]);
+            }
           }
-        }
-        for (let i = 0; i<films.length;i++){
-          if (films[i].style.toLowerCase().includes(cercador.value.toLowerCase())){
-            crearTargeta(films[i]);
+          for (let i = 0; i < films.length; i++) {
+            if (films[i].year.toString().includes(cercador.value)) {
+              crearTargeta(films[i]);
+            }
           }
-        }
-        for (let i = 0; i<films.length;i++){
-          if (films[i].director.toLowerCase().includes(cercador.value.toLowerCase())){
-            crearTargeta(films[i]);
+          for (let i = 0; i < films.length; i++) {
+            if (
+              films[i].style
+                .toLowerCase()
+                .includes(cercador.value.toLowerCase())
+            ) {
+              crearTargeta(films[i]);
+            }
           }
-        }
-        for (let i = 0; i<films.length;i++){
-          if (films[i].actors.join(" ").toLowerCase().includes(cercador.value.toLowerCase())){
-            crearTargeta(films[i]);
+          for (let i = 0; i < films.length; i++) {
+            if (
+              films[i].director
+                .toLowerCase()
+                .includes(cercador.value.toLowerCase())
+            ) {
+              crearTargeta(films[i]);
+            }
           }
-        }
-        for (let i = 0; i<films.length;i++){
-          if (films[i].oscars.toString().includes(cercador.value)){
-            crearTargeta(films[i]);
+          for (let i = 0; i < films.length; i++) {
+            if (
+              films[i].actors
+                .join(" ")
+                .toLowerCase()
+                .includes(cercador.value.toLowerCase())
+            ) {
+              crearTargeta(films[i]);
+            }
+          }
+          for (let i = 0; i < films.length; i++) {
+            if (films[i].oscars.toString().includes(cercador.value)) {
+              crearTargeta(films[i]);
+            }
           }
         }
       }
+      for (let i = 0; i < films.length; i++) {
+        crearTargeta(films[i]);
+      }
 
-    }
-    for (let i = 0; i<films.length;i++){
-      crearTargeta(films[i]);
-    }
-      
-    
+      function crearTargeta(film) {
+        const card = document.createElement("div");
+        card.className = "card";
 
-    function crearTargeta(film) {
-      const card = document.createElement("div");
-      card.className = "card";
-
-      const info = document.createElement("div");
-      info.className = "targeta";
-      info.innerHTML = `
+        const info = document.createElement("div");
+        info.className = "targeta";
+        info.innerHTML = `
   <div class="targeta-titol"><h2>${film.name}</h2></div>
   <div class="targeta-info"><p><b>Year: </b> ${film.year}</p></div>
   <div class="targeta-info"><p><b>Style: </b> ${film.style}</p></div>
@@ -139,13 +156,10 @@
   <div class="targeta-info"><p><b>Oscars: </b> ${film.oscars}</p></div>
 `;
 
-      card.appendChild(info);
-      divContainer.appendChild(card);
-    }
-    ///////////////////////////////////////////////////////////////////////////
-
-  </script>
-
-</body>
-
+        card.appendChild(info);
+        divContainer.appendChild(card);
+      }
+      ///////////////////////////////////////////////////////////////////////////
+    </script>
+  </body>
 </html>

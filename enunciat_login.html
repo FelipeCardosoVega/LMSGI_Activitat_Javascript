@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-
-      #botonSubmit  {
-        background-color: #04AA6D;
+      #botonSubmit {
+        background-color: #04aa6d;
         color: white;
-        display:block;
+        display: block;
       }
 
       .container {
@@ -16,7 +15,7 @@
       }
 
       #message_nom {
-        display:block;
+        display: block;
         background: #f1f1f1;
         color: #000;
         position: relative;
@@ -30,7 +29,7 @@
       }
 
       #message_passwd {
-        display:block;
+        display: block;
         background: #f1f1f1;
         color: #000;
         position: relative;
@@ -66,55 +65,67 @@
   </head>
 
   <body>
-
     <h3>Validació contrasenya</h3>
-
 
     <form action="enunciat_pelicules.html">
       <div class="container">
-            <label for="usrname">Nom</label><br>
-            <input type="text" id="usrname" name="usrname" title="Ha de tenir una @" required required><br><br>
+        <label for="usrname">Nom</label><br />
+        <input
+          type="text"
+          id="usrname"
+          name="usrname"
+          title="Ha de tenir una @"
+          required
+          required
+        /><br /><br />
 
-            <label for="psw">Contrasenya</label><br>
-            <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Ha de tenir una minúscula, una majúscula, un número i almenys vuit caràcters" required>
-            <br><br>
-            <input type="checkbox" id="mostrar" onclick="mostrarContrasenya()">Mostrar contrasenya
-      </div>      
-
-
+        <label for="psw">Contrasenya</label><br />
+        <input
+          type="password"
+          id="psw"
+          name="psw"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Ha de tenir una minúscula, una majúscula, un número i almenys vuit caràcters"
+          required
+        />
+        <br /><br />
+        <input
+          type="checkbox"
+          id="mostrar"
+          onclick="mostrarContrasenya()"
+        />Mostrar contrasenya
+      </div>
 
       <div id="message_nom">
-          <h3>El nom ha de tenir:</h3>
-          <p id="arroba" class="invalid">Una @</p>    
+        <h3>El nom ha de tenir:</h3>
+        <p id="arroba" class="invalid">Una @</p>
       </div>
 
       <div id="message_passwd">
-          <h3>La contrasenya ha de tenir:</h3>
-          <p id="letter" class="invalid">Una lletra <b>minúscula</b></p>
-          <p id="capital" class="invalid">Una lletra <b>majúscula</b></p>
-          <p id="number" class="invalid">Un <b>número</b></p>
-          <p id="length" class="invalid">Mínim <b>8 caràcters</b></p>
+        <h3>La contrasenya ha de tenir:</h3>
+        <p id="letter" class="invalid">Una lletra <b>minúscula</b></p>
+        <p id="capital" class="invalid">Una lletra <b>majúscula</b></p>
+        <p id="number" class="invalid">Un <b>número</b></p>
+        <p id="length" class="invalid">Mínim <b>8 caràcters</b></p>
       </div>
-      
-      <br><br><input type="submit" value="Enviar" id="botonSubmit">
+
+      <br /><br /><input type="submit" value="Enviar" id="botonSubmit" />
     </form>
 
-
-
     <script>
-    /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
+      /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
       var myInputUsr = document.getElementById("usrname");
       var myInputPsw = document.getElementById("psw");
-      var arroba =  document.getElementById("arroba");
+      var arroba = document.getElementById("arroba");
       var letter = document.getElementById("letter");
       var capital = document.getElementById("capital");
       var number = document.getElementById("number");
       var length = document.getElementById("length");
       var submitBoto = document.getElementById("botonSubmit");
 
-      var pswOK  = false;
+      var pswOK = false;
       var UsrOK = false;
-    
+
       //Ocultem boto submit
       document.getElementById("botonSubmit").style.display = "none";
 
@@ -130,33 +141,32 @@
       //Si l'usuari interactua amb el input del nom d'usuari o contrasenya, es veuran els missatges de el que ha de contenir cada apartartat
       myInputUsr.onfocus = function () {
         document.getElementById("message_nom").style.display = "block";
-      }
+      };
       myInputUsr.onblur = function () {
         document.getElementById("message_nom").style.display = "none";
-      }
+      };
       myInputPsw.onfocus = function () {
         document.getElementById("message_passwd").style.display = "block";
-      }
+      };
       myInputPsw.onblur = function () {
         document.getElementById("message_passwd").style.display = "none";
-      }
+      };
 
       //Validació del camp usuari per tal de comprovar que conté un @
       myInputUsr.onkeyup = function () {
         var necessaryChars = "@";
-        
-        if (myInputUsr.value.match(necessaryChars)){
+
+        if (myInputUsr.value.match(necessaryChars)) {
           arroba.classList.remove("invalid");
           arroba.classList.add("valid");
           UsrOK = true;
-        }else{
+        } else {
           arroba.classList.remove("valid");
           arroba.classList.add("invalid");
           UsrOK = false;
         }
         submitBoton();
-        
-      }
+      };
 
       //Validació dels camps de Password
       myInputPsw.onkeyup = function () {
@@ -164,8 +174,7 @@
         var upperCaseOK = false;
         var numbersOK = false;
         var lengthOK = false;
-        
-        
+
         // Validate lowercase letters
         var lowerCaseLetters = /[a-z]/g;
         if (myInputPsw.value.match(lowerCaseLetters)) {
@@ -212,29 +221,25 @@
           length.classList.add("invalid");
           lengthOK = false;
         }
-      
-        if (lowerCaseOK && upperCaseOK && numbersOK && lengthOK){
+
+        if (lowerCaseOK && upperCaseOK && numbersOK && lengthOK) {
           pswOK = true;
-        }else{
+        } else {
           pswOK = false;
         }
         submitBoton();
-
-      }
+      };
 
       //Activació o desactivació del submit. Només s'activa si els camps de contrasenya i usuari son correctes
-      function submitBoton(){
-        if (UsrOK && pswOK){
-          document.getElementById("botonSubmit").style.display="block";
-        }else{
+      function submitBoton() {
+        if (UsrOK && pswOK) {
+          document.getElementById("botonSubmit").style.display = "block";
+        } else {
           document.getElementById("botonSubmit").style.display = "none";
         }
       }
-    
 
-
-    ///////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////
     </script>
-
   </body>
 </html>
